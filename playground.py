@@ -35,36 +35,44 @@ for item in useful_cols:
     item["createdAt"] = timeStamp
 
 
-# Get sentiment by day and account id
-daily_sentiment = {}
+# Get sentiment by hour and account id
+hourly_sentiment = {}
 user_sentiment = {}
 for item in useful_cols:
 
     currSentiment = item["sentiment"]
-    daySentiment = daily_sentiment.get(item["createdAt"],0)
-    daily_sentiment[item["createdAt"]] = currSentiment + daySentiment
+    hourSentiment = hourly_sentiment.get(item["createdAt"],0)
+    hourly_sentiment[item["createdAt"]] = currSentiment + hourSentiment
     userSentiment,_ = user_sentiment.get(item["account.id"],(0,0))
     user_sentiment[item["account.id"]] = (currSentiment + userSentiment,item["account.username"])
 
     currSentiment += item["sentiment"]
-    daily_sentiment[item["createdAt"]] = currSentiment
+    hourly_sentiment[item["createdAt"]] = currSentiment
 
-# print(daily_sentiment)
-
-
-sorted_sentiment = [(day,sentiment) for day,sentiment in sorted(daily_sentiment.items(), key=lambda item:item[1], reverse = True)]
-top5Happy = sorted_sentiment[:5]
-top5Sad = sorted_sentiment[-5:]
-
-print("The top 5 happiest day in this dataset are: ")
-for day,sentiment in top5Happy:
-    print("Day: " + day + " with sentiment score: " + str(sentiment))
-
-print("The top 5 saddest day in this dataset are: ")
-for day,sentiment in top5Sad:
-    print("Day: " + day + " with sentiment score: " + str(sentiment))
+# print(hourly_sentiment)
 
 
+sorted_sentiment_hour = [(hour,sentiment) for hour,sentiment in sorted(hourly_sentiment.items(), key=lambda item:item[1], reverse = True)]
+top5Happy = sorted_sentiment_hour[:5]
+top5Sad = sorted_sentiment_hour[-5:]
+
+print("The top 5 happiest hour in this dataset are: ")
+for hour,sentiment in top5Happy:
+    print("Time: " + hour + " with sentiment score: " + str(sentiment))
+
+print("The top 5 saddest hour in this dataset are: ")
+for hour,sentiment in top5Sad:
+    print("Time: " + hour + " with sentiment score: " + str(sentiment))
+
+sorted_sentiment_user = [(userId,userName,sentiment) for userId, (sentiment,userName) in sorted(user_sentiment.items(),key=lambda item:item[1][0], reverse = True)]
+top5Happy = sorted_sentiment_user[:5]
+top5Sad = sorted_sentiment_user[-5:]
+print("The top 5 happiest user in this dataset are: ")
+for userId,userName,sentiment in top5Happy:
+    print(userName + ", account id " + userId + " with sentiment score: " + str(sentiment))
+print("The top 5 saddest user in this dataset are: ")
+for userId,userName,sentiment in top5Sad:
+    print(userName + ", account id " + userId + " with sentiment score: " + str(sentiment))
 
 
 

@@ -27,12 +27,13 @@ with open("mastodon-106k.ndjson", "r", encoding="utf-8") as f:
 # Preprocess timestamps
 for item in useful_cols:
     timeStamp = item["createdAt"]
-    extract = re.search(r"(\d{4}-\d{2}-\d{2})", timeStamp)
+    extract = re.search(r"(\d{4}-\d{2}-\d{2}T\d{2})", timeStamp)
     if extract:
         timeStamp = extract.group(1)
     else:
         timeStamp = None
     item["createdAt"] = timeStamp
+
 
 # Get sentiment by day and account id
 daily_sentiment = {}
@@ -41,14 +42,14 @@ for item in useful_cols:
 
     currSentiment = item["sentiment"]
     daySentiment = daily_sentiment.get(item["createdAt"],0)
-    userSentiment,username = user_sentiment.get(item["account.id"],(0,0))
     daily_sentiment[item["createdAt"]] = currSentiment + daySentiment
-    user_sentiment[[item["account.id"]]] = (currSentiment + userSentiment,item["account.username"])
+    userSentiment,_ = user_sentiment.get(item["account.id"],(0,0))
+    user_sentiment[item["account.id"]] = (currSentiment + userSentiment,item["account.username"])
 
     currSentiment += item["sentiment"]
     daily_sentiment[item["createdAt"]] = currSentiment
 
-print(daily_sentiment)
+# print(daily_sentiment)
 
 
 sorted_sentiment = [(day,sentiment) for day,sentiment in sorted(daily_sentiment.items(), key=lambda item:item[1], reverse = True)]

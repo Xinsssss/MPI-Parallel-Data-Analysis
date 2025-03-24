@@ -51,11 +51,11 @@ def main():
     else:
         dataPerCore = None
 
-    COMM.barrier
+    COMM.Barrier()
     
     data = COMM.scatter(dataPerCore,root=0)
 
-    print("Rank " + str(RANK) + "out of " + str(SIZE) + "received data from " + data["startByte"] + " to " + data["endByte"], flush=True)
+    print("Rank " + str(RANK) + "out of " + str(SIZE) + "received data from " + str(data["startByte"]) + " to " + str(data["endByte"]))
 
 
 

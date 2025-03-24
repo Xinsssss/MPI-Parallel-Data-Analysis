@@ -10,7 +10,11 @@ class Summariser():
 
     # mode: user or hour
     def __init__(self, mode):
-        return
+        if mode == "user":
+            self.column = "account.id"
+        elif mode == "time":
+            self.column = "createdAt"
+
     
     def sum_sentiment(self, data):
         return

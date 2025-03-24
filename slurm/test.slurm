@@ -6,5 +6,5 @@
 #SBATCH --output=../output/testRun.txt
 #SBATCH --error=../output/testRun.txt
 module purge
-module load Python/3.8.19
+module load Python/3.10.4
 mpirun python -u ../main.py --datasize 106k

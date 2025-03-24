@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 from mpi4py import MPI
 import argparse
 from datetime import datetime
@@ -17,7 +18,6 @@ def main():
 
     args=parser.parse_args()
 
-
     datasize = args.datasize
 
     print("Now running on the " + datasize + " file")
@@ -27,6 +27,7 @@ def main():
     # preprocessor = Preprocessor(filePath)
 
     if RANK==0:
+
         # returns coordiante of range of data each core will be reading
         totalSize = os.path.getsize(filePath)
         chunkSize = totalSize // SIZE
@@ -54,11 +55,12 @@ def main():
     
     data = COMM.scatter(dataPerCore,root=0)
 
-    print("Rank " + str(RANK) + "out of " + str(SIZE) + "received data from " + data["startByte"] + " to " + data["endByte"])
+    print("Rank " + str(RANK) + "out of " + str(SIZE) + "received data from " + data["startByte"] + " to " + data["endByte"], flush=True)
 
 
 
 if __name__=="__main__":
+
     START_TIME = datetime.now()
     main()
     END_TIME = datetime.now()

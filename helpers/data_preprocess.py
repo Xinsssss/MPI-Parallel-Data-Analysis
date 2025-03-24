@@ -2,8 +2,18 @@
 
 class Preprocessor():
 
-    def __init__(self):
+    def __init__(self,filePath):
+        self.filePath = filePath
+    
+    def distributeData(self,SIZE):
         return
+
+    def extractColumns(self):
+        return
+    
+    def extractHour(self):
+        return
+    
 
 
 class Summariser():

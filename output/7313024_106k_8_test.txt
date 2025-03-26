@@ -1,0 +1,26 @@
+Now running on the 106k file
+successfully opend file
+allocated to processor 0
+allocated to processor 1
+allocated to processor 2
+allocated to processor 3
+allocated to processor 4
+allocated to processor 5
+allocated to processor 6
+finish allocating
+Rank 0out of 8received data from 0 to 14367
+Total process time: 0:00:00.016515
+Rank 2out of 8received data from 30271 to 43961
+Total process time: 0:00:00.016402
+Rank 4out of 8received data from 60048 to 73992
+Total process time: 0:00:00.016491
+Rank 6out of 8received data from 89493 to 105674
+Total process time: 0:00:00.016402
+Rank 1out of 8received data from 14368 to 30270
+Total process time: 0:00:00.023276
+Rank 3out of 8received data from 43962 to 60047
+Total process time: 0:00:00.023347
+Rank 7out of 8received data from 105675 to 108045
+Total process time: 0:00:00.023346
+Rank 5out of 8received data from 73993 to 89492
+Total process time: 0:00:00.023288

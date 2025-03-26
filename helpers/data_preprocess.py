@@ -2,10 +2,19 @@
 
 class Preprocessor():
 
-    def __init__(self,filePath):
+    def __init__(self,filePath,dataRange):
         self.filePath = filePath
-    
-    def distributeData(self,SIZE):
+        self.dataRange = dataRange
+        self.dataRows = None
+
+    def initialiseData(self):
+        import json
+        with open(self.filePath,"rb") as f:
+            f.seek(self.dataRange["startByte"])
+            data = f.read(self.dataRange["endByte"] - self.dataRange["startByte"]).decode("utf-8",errors="ignore")
+            self.dataRows = data.split("\n")
+
+    def preprocessData(self):
         return
 
     def extractColumns(self):

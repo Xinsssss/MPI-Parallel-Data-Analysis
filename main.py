@@ -3,19 +3,12 @@
 from mpi4py import MPI
 import argparse
 from datetime import datetime
-from helpers.data_preprocess import Preprocessor,Summariser
+from helpers.data_preprocess import *
 import os
 
 COMM = MPI.COMM_WORLD
 RANK = COMM.Get_rank()
 SIZE = COMM.Get_size()
-
-def readData(dataRange,filename):
-    
-    with open(self.filePath,"rb") as f:
-        f.seek(self.dataRange["startByte"])
-        data = f.read(self.dataRange["endByte"] - self.dataRange["startByte"]).decode("utf-8",errors="ignore")
-        self.dataRows = data.split("\n")
 
 
 
@@ -33,26 +26,26 @@ def main():
     if RANK==0:
 
         # returns coordiante of range of data each core will be reading
-        print("Now running on the " + datasize + " file")
+        #print("Now running on the " + datasize + " file")
         totalSize = os.path.getsize(filePath)
         chunkSize = totalSize // SIZE
 
         dataPerCore = []
         startByte = 0
         with open(filePath,'rb') as f:
-            print("successfully opend file")
+            #print("successfully opend file")
             for i in range(SIZE):
                 if i != SIZE - 1:
                     endByte = startByte + chunkSize
                     f.seek(endByte)
-                    while f.read(1) != b'\n':
-                        endByte += 1
+                    f.readline()
+                    endByte = f.tell()
                     dataPerCore.append({"startByte": startByte, "endByte": endByte})
                     startByte = endByte + 1
-                    print("allocated to processor " + str(i))
+                    #print("allocated to processor " + str(i))
                 if i == SIZE - 1: # last core
                     dataPerCore.append({"startByte":startByte,"endByte":totalSize})
-                    print("finish allocating")
+                    #print("finish allocating")
 
 
        
@@ -64,11 +57,11 @@ def main():
     dataRange = COMM.scatter(dataPerCore,root=0)
 
     # print("Rank " + str(RANK) + "out of " + str(SIZE) + " received data from " + str(dataRange["startByte"]) + " to " + str(dataRange["endByte"]))
-    readData(dataRange,filePath)
+    data_reader(dataRange,filePath)
 
 if __name__=="__main__":
 
     START_TIME = datetime.now()
     main()
     END_TIME = datetime.now()
-    print("Total process time: " + str(END_TIME - START_TIME))
+    #print("Total process time: " + str(END_TIME - START_TIME))

@@ -6,7 +6,3 @@ def data_reader(filePath, dataRange):
         f.seek(dataRange["startByte"])
         data = f.read(dataRange["endByte"] - dataRange["startByte"]).decode("utf-8", errors="ignore")
         lines = data.split("\n")
-        for line in lines:
-            print(line)
-
-    return

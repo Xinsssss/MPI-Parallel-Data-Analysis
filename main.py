@@ -57,7 +57,7 @@ def main():
     dataRange = COMM.scatter(dataPerCore,root=0)
 
     # print("Rank " + str(RANK) + "out of " + str(SIZE) + " received data from " + str(dataRange["startByte"]) + " to " + str(dataRange["endByte"]))
-    data_reader(dataRange,filePath)
+    data_reader(filePath,dataRange)
 
 if __name__=="__main__":
 

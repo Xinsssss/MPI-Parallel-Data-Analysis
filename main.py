@@ -58,6 +58,11 @@ def main():
 
     # print("Rank " + str(RANK) + "out of " + str(SIZE) + " received data from " + str(dataRange["startByte"]) + " to " + str(dataRange["endByte"]))
     data = data_reader(filePath,dataRange)
+    byHour,byUser = summarise_sentiment_score(data)
+
+    print("result from processor " + str(RANK))
+    print_dictionary(byHour,"time")
+    print_dictionary(byUser,"user")
 
 if __name__=="__main__":
 

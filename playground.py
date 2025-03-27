@@ -3,6 +3,7 @@ from datetime import datetime
 import json
 import re
 
+
 START_TIME = datetime.now()
 
 # Extract useful columns
@@ -73,8 +74,6 @@ for userId,userName,sentiment in top5Happy:
 print("The top 5 saddest user in this dataset are: ")
 for userId,userName,sentiment in top5Sad:
     print(userName + ", account id " + userId + " with sentiment score: " + str(sentiment))
-
-
 
 
 END_TIME = datetime.now()

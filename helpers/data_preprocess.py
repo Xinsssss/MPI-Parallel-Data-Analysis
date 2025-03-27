@@ -68,9 +68,9 @@ def extract_time(timeStamp):
 def print_dictionary(dict,mode):
 
     for key,value in dict.items():
-        if mode == "time":
+        if mode == "time" and key:
             timeSplit = key.split("T")
             print("Day " + timeSplit[0] + " " + timeSplit[1] + " to " + str(int(timeSplit[1])+1))
-        if mode == "user":
+        if mode == "user" and key :
             print("User " + value[1] + " with id " + key)
         print("has a sentiment score of: " + str(value))

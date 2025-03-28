@@ -1,0 +1,58 @@
+result from processor 0
+has a sentiment score of: 0.7195546911214127
+User martingelin with id 109491602528257114
+has a sentiment score of: (0.02127659574468085, 'martingelin')
+User InstantArcade with id 111825369875335844
+has a sentiment score of: (0.05, 'InstantArcade')
+User JasonStiff with id 109374015892055101
+has a sentiment score of: (0, 'JasonStiff')
+User bbcnewsfeed with id 110311567254606498
+has a sentiment score of: (-0.009523809523809525, 'bbcnewsfeed')
+User USAToday with id 113200651710491011
+has a sentiment score of: (-0.0883693283138498, 'USAToday')
+User hermeticlibrary with id 112861298795622268
+has a sentiment score of: (0, 'hermeticlibrary')
+User ukraine with id 111110309053897502
+has a sentiment score of: (-0.005813953488372093, 'ukraine')
+User ClintBarton with id 109989913866517927
+has a sentiment score of: (-0.0380952380952381, 'ClintBarton')
+User salad_bar_breath with id 109391310429908853
+has a sentiment score of: (0, 'salad_bar_breath')
+User zaccomode with id 113160956497371641
+has a sentiment score of: (0.043478260869565216, 'zaccomode')
+User f1mania with id 113398025966287784
+has a sentiment score of: (-0.023529411764705882, 'f1mania')
+User taiyo with id 109344808530420677
+has a sentiment score of: (-0.022222222222222223, 'taiyo')
+User GeekAndDad with id 109361178362205762
+has a sentiment score of: (0.020833333333333332, 'GeekAndDad')
+User quasirealsmiths with id 110073401734597817
+has a sentiment score of: (0, 'quasirealsmiths')
+User mdmrn with id 109377791427383892
+has a sentiment score of: (0.0021929824561403508, 'mdmrn')
+User TheHindu with id 113443732887173058
+has a sentiment score of: (-0.020202020202020204, 'TheHindu')
+User DoubleTreble with id 109564636057862628
+has a sentiment score of: (0.1038961038961039, 'DoubleTreble')
+User hhwerbefrei with id 109477432158629143
+has a sentiment score of: (0.023668639053254437, 'hhwerbefrei')
+User WillyECoyote69 with id 109343777457204588
+has a sentiment score of: (0.08571428571428572, 'WillyECoyote69')
+User f7922a0adb3fa4dda5eecaa62f6f7ee6159f7f55e08036686c68e08382c34788 with id 112094600272746858
+has a sentiment score of: (0, 'f7922a0adb3fa4dda5eecaa62f6f7ee6159f7f55e08036686c68e08382c34788')
+User KimPerales with id 109362721154478336
+has a sentiment score of: (-0.02976190476190476, 'KimPerales')
+User roque with id 109543285562339262
+has a sentiment score of: (0.10344827586206896, 'roque')
+User beka_valentine with id 109392096256908422
+has a sentiment score of: (0.15, 'beka_valentine')
+User cults3d with id 109388211935357053
+has a sentiment score of: (0.019230769230769232, 'cults3d')
+User JenYetAgain with id 112318194857036680
+has a sentiment score of: (0, 'JenYetAgain')
+User BritishKoalaTea with id 112595227942677067
+has a sentiment score of: (0, 'BritishKoalaTea')
+User freaktechnik with id 109376090379546483
+has a sentiment score of: (0.3333333333333333, 'freaktechnik')
+User itsfoss with id 109324983345470642
+has a sentiment score of: (0, 'itsfoss')

@@ -12,6 +12,7 @@ SIZE = COMM.Get_size()
 
 
 
+
 def main():
 
     parser = argparse.ArgumentParser(description="Define Dataset")
@@ -24,7 +25,7 @@ def main():
     filePath = f"/data/gpfs/projects/COMP90024/mastodon-{datasize}.ndjson"
 
     if RANK==0:
-
+        
         # returns coordiante of range of data each core will be reading
         #print("Now running on the " + datasize + " file")
         totalSize = os.path.getsize(filePath)
@@ -60,13 +61,58 @@ def main():
     data = data_reader(filePath,dataRange)
     byHour,byUser = summarise_sentiment_score(data)
 
-    print("result from processor " + str(RANK))
-    print_dictionary(byHour,"time")
-    print_dictionary(byUser,"user")
+    # print("result from processor " + str(RANK))
+    # print_dictionary(byHour,"time")
+    # print_dictionary(byUser,"user")
+
+    COMM.Barrier()
+
+    allByHour = COMM.gather(byHour,root=0)
+    allByUser = COMM.gather(byUser,root=0)
+    
+    # Summarise result in the root processor
+    if RANK == 0:
+        
+        sumByHour = {}
+        for byHour in allByHour:
+            for key,value in byHour.items():
+                sumByHour[key] = sumByHour.get(key,0) + value
+
+        sortedByHour = sorted(sumByHour.items(), key=lambda x: x[1],reverse=True)
+        happiestHour = sortedByHour[:5]
+        saddestHour = sortedByHour[-5:]
+        
+        sumByUser = {}
+        for byUser in allByUser:
+            for key,value in byUser.items():
+                sumByUser[key] = (sumByUser.get(key,(0,None)[0] + value[0]),value[1])
+        sortedByUser = sorted(sumByUser.items(), key=lambda x: x[1][0],reverse=True)
+        happiestUser = sortedByUser[:5]
+        saddestUser = sortedByUser[-5:]
+
+        print("Happiest hours: ") 
+        print_dictionary(happiestHour,"time")
+        print("Saddest hours: ")
+        print_dictionary(saddestHour,"time")
+        print("Happiest users: ")
+        print_dictionary(happiestUser,"user")
+        print("Saddest users: ")
+        print_dictionary(saddestUser,"user")
+        #print(happiestHour)
+        #print(saddestHour)
+        #print(happiestUser)
+        #print(saddestUser)
+
+        #print(sortedByHour)
+        #print(sortedByUser)
+
+        
+        
+
+
+
 
 if __name__=="__main__":
 
-    START_TIME = datetime.now()
     main()
-    END_TIME = datetime.now()
-    #print("Total process time: " + str(END_TIME - START_TIME))
+    # print("Total process time: " + str(END_TIME - START_TIME))

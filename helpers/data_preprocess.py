@@ -41,7 +41,7 @@ def summarise_sentiment_score(data):
         doc = row.get("doc",{})
 
         if doc:
-            timeStamp = extract_time(row.get("createdAt",None))
+            timeStamp = extract_time(doc.get("createdAt",None))
             sentiment = doc.get("sentiment", None)
             accountId = doc.get("account", {}).get("id", None)
             userName = doc.get("account", {}).get("username", None)
@@ -61,16 +61,18 @@ def extract_time(timeStamp):
 
     if not timeStamp:
         return None
+    time = re.search(r"(\d{4}-\d{2}-\d{2}T\d{2})", timeStamp).group(1)
+    return time
+
+
+def print_dictionary(printList,mode):
+
+    if mode == "time":
+        for (time,sentiment) in printList:
+            timeSplit = time.split("T")
+            print("Day " + timeSplit[0] + " " + timeSplit[1] + " to " + str(int(timeSplit[1])+1),end="")
+            print(" has a sentiment score of: " + str(sentiment))
     
-    return re.search(r"(\d{4}-\d{2}-\d{2}T\d{2})", timeStamp).group(1)
-
-
-def print_dictionary(dict,mode):
-
-    for key,value in dict.items():
-        if mode == "time" and key:
-            timeSplit = key.split("T")
-            print("Day " + timeSplit[0] + " " + timeSplit[1] + " to " + str(int(timeSplit[1])+1))
-        if mode == "user" and key :
-            print("User " + value[1] + " with id " + key)
-        print("has a sentiment score of: " + str(value))
+    if mode == "user":
+        for(userId,(sentiment,userName)) in printList:
+            print("User " + userName + " with ID " + userId + " has a sentiment score of: " + str(sentiment))

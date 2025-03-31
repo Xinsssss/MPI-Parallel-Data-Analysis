@@ -32,6 +32,42 @@ def data_reader(filePath, dataRange, chunkSize = 1024*1024):
 
         return json_lines
 
+def read_data(filePath,dataRange):
+    with open(filePath,"rb") as f:
+        f.seek(dataRange["startByte"])
+        while f.tell() < dataRange["endByte"]:
+            line = f.readline()
+            if not line:
+                break
+            data = json.loads(line.strip())
+            yield data
+
+def process_data(filePath,dataRange):
+
+    sentiment_byHour = {}
+    sentiment_byUser = {}
+    for data in read_data(filePath,dataRange):
+        doc = data.get("doc",{})
+        if doc:
+            sentiment = doc.get("sentiment", None)
+            if not sentiment:
+                continue
+            timeStamp = extract_time(doc.get("createdAt",None))
+            accountId = doc.get("account", {}).get("id", None)
+            userName = doc.get("account", {}).get("username", None)
+
+            sentiment_byHour[timeStamp] = sentiment_byHour.get(timeStamp,0) + sentiment
+            # this is stored as {accountId: (sentiment, userName)}
+            # we assume one id mathces to one username, but since user may change their username
+            # but the id is the primary key, we update the username everytime we sees a new post
+            # from this id
+            sentiment_byUser[accountId] = (sentiment_byUser.get(accountId,(0,None))[0] + sentiment,userName)
+            
+
+
+    return sentiment_byHour, sentiment_byUser
+
+
 def summarise_sentiment_score(data):
 
     sentiment_by_hour = {}
@@ -41,8 +77,10 @@ def summarise_sentiment_score(data):
         doc = row.get("doc",{})
 
         if doc:
-            timeStamp = extract_time(doc.get("createdAt",None))
             sentiment = doc.get("sentiment", None)
+            if not sentiment:
+                continue
+            timeStamp = extract_time(doc.get("createdAt",None))
             accountId = doc.get("account", {}).get("id", None)
             userName = doc.get("account", {}).get("username", None)
 

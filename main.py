@@ -39,8 +39,8 @@ def main():
                 if i != SIZE - 1:
                     endByte = startByte + chunkSize
                     f.seek(endByte)
-                    f.readline()
-                    endByte = f.tell()
+                    while f.read(1) != b"\n":
+                        endByte += 1
                     dataPerCore.append({"startByte": startByte, "endByte": endByte})
                     startByte = endByte + 1
                     #print("allocated to processor " + str(i))
@@ -58,8 +58,11 @@ def main():
     dataRange = COMM.scatter(dataPerCore,root=0)
 
     # print("Rank " + str(RANK) + "out of " + str(SIZE) + " received data from " + str(dataRange["startByte"]) + " to " + str(dataRange["endByte"]))
-    data = data_reader(filePath,dataRange)
-    byHour,byUser = summarise_sentiment_score(data)
+    # data = data_reader(filePath,dataRange)
+    # byHour,byUser = summarise_sentiment_score(data)
+
+    byHour,byUser = process_data(filePath,dataRange)
+    
 
     # print("result from processor " + str(RANK))
     # print_dictionary(byHour,"time")
@@ -85,7 +88,8 @@ def main():
         sumByUser = {}
         for byUser in allByUser:
             for key,value in byUser.items():
-                sumByUser[key] = (sumByUser.get(key,(0,None)[0] + value[0]),value[1])
+                #sumByUser[key] = (sumByUser.get(key,(0,None)[0] + value[0]),value[1])
+                sumByUser[key] = (sumByUser.get(key,(0,None))[0] + value[0],value[1])
         sortedByUser = sorted(sumByUser.items(), key=lambda x: x[1][0],reverse=True)
         happiestUser = sortedByUser[:5]
         saddestUser = sortedByUser[-5:]
@@ -114,5 +118,9 @@ def main():
 
 if __name__=="__main__":
 
+    START_TIME = datetime.now()
     main()
-    # print("Total process time: " + str(END_TIME - START_TIME))
+    if RANK == 0:
+        END_TIME = datetime.now()
+        print("Takes " + str(END_TIME - START_TIME) + " to run")
+    

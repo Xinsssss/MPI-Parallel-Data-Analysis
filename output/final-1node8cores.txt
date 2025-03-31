@@ -1,0 +1,28 @@
+It takes 0:00:00.733921 to decompose data
+It takes 0:03:22.557111 to process and return data
+It takes 0:00:01.249182 to summarise data
+Happiest hours: 
+Day 2025-01-01 00 to 1 has a sentiment score of: 206.15209972304456
+Day 2024-12-31 23 to 24 has a sentiment score of: 187.465476632202
+Day 2025-01-01 05 to 6 has a sentiment score of: 135.92521743446838
+Day 2024-12-24 22 to 23 has a sentiment score of: 117.2863136120121
+Day 2024-12-25 15 to 16 has a sentiment score of: 114.60195453225167
+Saddest hours: 
+Day 2025-02-03 16 to 17 has a sentiment score of: -223.83348768435087
+Day 2025-01-30 18 to 19 has a sentiment score of: -226.90971970072644
+Day 2025-01-30 17 to 18 has a sentiment score of: -256.5684250419817
+Day 2024-09-11 01 to 2 has a sentiment score of: -305.5760669374102
+Day 2024-11-06 07 to 8 has a sentiment score of: -373.76724797383497
+Happiest users: 
+User gameoflife with ID 110237351908820391 has a sentiment score of: 9105.741942204433
+User TheFigen_ with ID 112728392129924952 has a sentiment score of: 2541.4742243891906
+User EmojiAquarium with ID 113441357479871732 has a sentiment score of: 2086.4567379515915
+User choochoo with ID 113541715572887376 has a sentiment score of: 1978.743101102543
+User hnbot with ID 110006430181118061 has a sentiment score of: 1917.7935878054188
+Saddest users: 
+User MissingYou with ID 112071598249945636 has a sentiment score of: -3341.603338119541
+User uutisbot with ID 111873606251312850 has a sentiment score of: -4066.138170138108
+User TheHindu with ID 113443732887173058 has a sentiment score of: -5710.722600655697
+User uavideos with ID 109471254002284799 has a sentiment score of: -5901.960347560852
+User realTuckFrumper with ID 109521050152429017 has a sentiment score of: -9094.08127545372
+Total run time is: 0:03:24.700405

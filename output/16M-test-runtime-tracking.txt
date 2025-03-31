@@ -1,0 +1,28 @@
+It takes 0:00:00.049929 to decompose data
+It takes 0:00:00.023883 to process and return data
+It takes 0:00:00.000721 to summarise data
+Happiest hours: 
+Day 2025-02-10 02 to 3 has a sentiment score of: 15.103229201168421
+Day 2025-02-10 01 to 2 has a sentiment score of: 6.481785192688535
+Day 2025-02-09 02 to 3 has a sentiment score of: 0.29550866749511767
+Day 2025-02-09 00 to 1 has a sentiment score of: 0.10068342689773005
+Day 2025-02-09 22 to 23 has a sentiment score of: 0.07518327520883744
+Saddest hours: 
+Day 2025-02-09 19 to 20 has a sentiment score of: -0.13482507142558953
+Day 2025-02-09 18 to 19 has a sentiment score of: -0.1437908496732026
+Day 2025-02-08 23 to 24 has a sentiment score of: -0.1557886557886558
+Day 2025-02-10 00 to 1 has a sentiment score of: -0.45113367862839826
+Day 2025-02-09 23 to 24 has a sentiment score of: -1.7850282320462347
+Happiest users: 
+User amyfou with ID 109321811420418919 has a sentiment score of: 2.3929966114769488
+User GolfDigest with ID 110542985111474642 has a sentiment score of: 1.843560606060606
+User Eagles with ID 109734012824774037 has a sentiment score of: 1.498867102396514
+User stellarskylark with ID 110149910031220379 has a sentiment score of: 1.3333333333333333
+User NFL_Memes with ID 109893804991977967 has a sentiment score of: 1.093002113125952
+Saddest users: 
+User PhoenixSerenity with ID 112605820244754466 has a sentiment score of: -0.8600882718775593
+User BostonBibliophile with ID 109363139681819635 has a sentiment score of: -0.8698412698412699
+User byteseu with ID 112202977476831380 has a sentiment score of: -0.9491631660364678
+User missladyartemis with ID 109977447109691181 has a sentiment score of: -1.4301725954694224
+User morachbeag with ID 109384731896498258 has a sentiment score of: -1.59439770255468
+Total run time is: 0:00:00.074692

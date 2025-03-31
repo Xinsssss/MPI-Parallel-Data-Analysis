@@ -9,7 +9,7 @@ import os
 COMM = MPI.COMM_WORLD
 RANK = COMM.Get_rank()
 SIZE = COMM.Get_size()
-
+START_TIME = datetime.now()
 
 
 
@@ -55,6 +55,10 @@ def main():
 
     COMM.Barrier()
     
+    if RANK == 0:
+        SCATTER_TIME = datetime.now()
+        print("It takes " + str(SCATTER_TIME - START_TIME) + " to decompose data")
+    
     dataRange = COMM.scatter(dataPerCore,root=0)
 
     # print("Rank " + str(RANK) + "out of " + str(SIZE) + " received data from " + str(dataRange["startByte"]) + " to " + str(dataRange["endByte"]))
@@ -72,6 +76,10 @@ def main():
 
     allByHour = COMM.gather(byHour,root=0)
     allByUser = COMM.gather(byUser,root=0)
+
+    if RANK == 0:
+        GATHER_TIME = datetime.now()
+        print("It takes " + str(GATHER_TIME - SCATTER_TIME) + " to process and return data")
     
     # Summarise result in the root processor
     if RANK == 0:
@@ -88,11 +96,13 @@ def main():
         sumByUser = {}
         for byUser in allByUser:
             for key,value in byUser.items():
-                #sumByUser[key] = (sumByUser.get(key,(0,None)[0] + value[0]),value[1])
                 sumByUser[key] = (sumByUser.get(key,(0,None))[0] + value[0],value[1])
         sortedByUser = sorted(sumByUser.items(), key=lambda x: x[1][0],reverse=True)
         happiestUser = sortedByUser[:5]
         saddestUser = sortedByUser[-5:]
+
+        SUM_TIME = datetime.now()
+        print("It takes " + str(SUM_TIME - GATHER_TIME) + " to summarise data")
 
         print("Happiest hours: ") 
         print_dictionary(happiestHour,"time")
@@ -102,14 +112,6 @@ def main():
         print_dictionary(happiestUser,"user")
         print("Saddest users: ")
         print_dictionary(saddestUser,"user")
-        #print(happiestHour)
-        #print(saddestHour)
-        #print(happiestUser)
-        #print(saddestUser)
-
-        #print(sortedByHour)
-        #print(sortedByUser)
-
         
         
 
@@ -118,9 +120,8 @@ def main():
 
 if __name__=="__main__":
 
-    START_TIME = datetime.now()
     main()
     if RANK == 0:
         END_TIME = datetime.now()
-        print("Takes " + str(END_TIME - START_TIME) + " to run")
+        print("Total run time is: " + str(END_TIME - START_TIME))
     
